@@ -1,0 +1,44 @@
+
+
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
+
+
+dcap = dict(DesiredCapabilities.PHANTOMJS)
+
+
+dcap["phantomjs.page.settings.userAgent"] = (
+"Mozilla/5.0 (Linux; Android 5.1.1; Nexus 6 Build/LYZ28E) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.23 Mobile Safari/537.36"
+)
+
+
+executable_path = "C:/Users/Administrator/Downloads/phantomjs-2.1.1-windows/phantomjs-2.1.1-windows/bin/phantomjs.exe"
+
+desired_capabilities=dcap
+
+service_args = ['--proxy=127.0.0.1:1080', '--proxy-type=socks5']
+
+
+#»¢ÆËcookies
+cookies = {
+	"ua": "17592580",
+	"_CLT": "918ebe7bb324d8673460f7af1d701a5c",
+	"u": "30995884|5ZOI55m75YeM5pmo5Zub54K55pyq55yg|ca40|94fdf2c4d61ef61f55c7a77ca6f49e4f|d61ef61f55c7a77c|aHVwdV9kYWJmMTdjMWEzNTFjMzI5",
+	"us": "a9603608386ef3c69cb948b89f6bb23d125a70f96a81787a4472dc565625b388e73e7f4d417a108eec725f723f66cf9daeefee094d9ab8a40a2c3a2d3fa16e8c"
+}
+
+
+service_args = [ '--proxy=127.0.0.1:9050', '--proxy-type=socks5']
+
+proxies = {
+	"http": "socks5://127.0.0.1:9050",
+	"https": "socks5://127.0.0.1:9050"
+}
+
+#ip查询
+https://api.ipify.org/?format=json
+http://icanhazip.com/
+
+#http_tor代理
+
+proxies = {'http': 'http://127.0.0.1:7777', 'https': 'http://127.0.0.1:7777'}

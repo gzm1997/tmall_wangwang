@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>datePicker</title>
+    <style>
+        h1{
+            width:100%;
+            height:40px;
+            line-height:40px;
+            font-family: Arial;
+            text-align: center;
+        }
+        .container{
+            width: 100%;
+            margin: 0 auto;
+        }
+        #calendar1{
+            width: 100%;  
+            min-height: 100vh;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .calendar1-msg,.calendar2-msg{
+            width:100%;
+            height:30px;
+            line-height:30px;
+            color:#000;
+            text-align: center;
+            font-size:14px;
+            display:block;
+        }
+        .btn{
+            width:200px;
+            height:40px;
+            line-height:40px;
+            text-align: center;
+            border-radius:5px;
+            background-color:#f00;
+            text-decoration: none;
+            color:#fff;
+            font-size:14px;
+            margin:0 auto;
+            display: block;
+            margin-bottom:30px;
+        }
+    </style>
+    <link rel="stylesheet" href="../static/css/nice-date-picker.css">
+    <script src="../static/js/nice-date-picker.js"></script>
+    <script src="../static/vendor/jquery/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    <h1>点击日期下载，其中阴影为本日日期</h1>
+<div class="container">
+    <div id="calendar1">
+        <div id="calendar1-wrapper1"></div>
+        <span class="calendar1-msg"></span>
+    </div>
+
+</div>
+<script type = "text/javascript">
+
+    // $(document).ready(function(){
+        new niceDatePicker({
+            dom:document.getElementById('calendar1-wrapper1'),
+            onClickDate:function(date){
+                // document.querySelector('.calendar1-msg').innerHTML='calendar1 your selected '+date;
+                var array = date.split("/")
+                var dt = new Date(array[0], array[1], array[2]);
+                $.ajax({
+                    data : {
+                        Year : dt.getFullYear(),
+                        Month : dt.getMonth(),
+                        Day : dt.getDate()
+                    },
+                    type : 'POST',
+                    // url : "/date/" + date
+                }).done(function(data) {
+                    if (data.error) {
+                        alert("服务器出错")
+                    }
+                    else if("success" in data) {
+                        window.location.href = "/return_file?date=" + data.success;
+                    }
+                    else if("fail" in data) {
+                        window.location.href = "/index";
+                    }
+                })
+            }
+        });
+    // });
+</script>
+</body>
+</html>
